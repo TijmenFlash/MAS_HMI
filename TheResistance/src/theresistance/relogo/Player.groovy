@@ -27,13 +27,14 @@ class Player extends ReLogoTurtle {
 	}
 	def chooseTeam(){
 		if (leader == true){
-				
+			
+			
 			
 		}
 	}
 	
 	def voteForTeam(){
-		//conflicting comment hah
+		
 	}
 	
 	def voteResultMission(){
