@@ -12,6 +12,8 @@ import repast.simphony.relogo.schedule.Setup;
 import theresistance.ReLogoLink;
 
 class TrustLink extends ReLogoLink {
+	//trust class
+	
 	private double trustValue = 0;
 	private int playerNr;
 	
