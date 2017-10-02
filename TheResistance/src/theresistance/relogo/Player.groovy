@@ -33,8 +33,8 @@ class Player extends ReLogoTurtle {
 		}
 	}
 	
-	def voteForTeam(){
-		
+	def voteForTeam(String label){
+		this.label = label 
 	}
 	
 	def voteResultMission(){

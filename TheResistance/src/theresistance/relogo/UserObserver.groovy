@@ -31,10 +31,10 @@ class UserObserver extends ReLogoObserver{
 			// make sure that the spies are randomized
 			int spyChance = random(4)
 			
-			if (spyChance == 0 |(count == maxPlayers & spyCount != 2) |(count == 4 & spyCount==0))  {
+			if (spyCount < 2 & (spyChance == 0 |(count == maxPlayers & spyCount != 2) |(count == 4 & spyCount==0)))  {
 				setRole("Spy");
 				spyCount+=1
-				shape = "zombie"
+				shape = "zombies"
 			}else{
 				setRole("Resistance")
 				shape = "person"
@@ -67,6 +67,9 @@ class UserObserver extends ReLogoObserver{
 		ask(players()){
 			chooseTeam()
 				
+		}
+		for (int i = 1; i < 10; i++){
+			ask(players()){voteForTeam(i.toString())}
 		}
 		
 		ask(players()){
