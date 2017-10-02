@@ -19,9 +19,9 @@ class UserObserver extends ReLogoObserver{
 		int order = 1;
 		int xcor = 1;
 		int ycor = 1;
-		
+		TrustLink l;
 		int gameRound = 1
-		
+		double testValue = 0;
 		int maxPlayers = 5;
 		int count = 1;
 		int spyCount = 0;
@@ -53,24 +53,32 @@ class UserObserver extends ReLogoObserver{
 			//visualisation
 			size = 4
 			
-			setxy(xcor, ycor)
+			setxy(randomXcor(), randomYcor())
 			
-			xcor+=2; ycor+=2;
+			//xcor+=2; ycor+=2;
 			order = order+1
 			
+			for (player in players()){
+				testValue+=0.2
+				l = createTrustLinkTo(player)
+				l.setTrustValue(testValue)
+			}
+			testValue = 0;
 		}
+		
+		
+		
 	/*end setup*/	
 	}
 	
 	@Go
 	def go(){
+		System.out.println("Go!")
 		ask(players()){
 			chooseTeam()
 				
 		}
-		for (int i = 1; i < 10; i++){
-			ask(players()){voteForTeam(i.toString())}
-		}
+		ask(players()){voteForTeam()}
 		
 		ask(players()){
 			

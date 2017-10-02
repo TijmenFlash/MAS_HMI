@@ -25,6 +25,7 @@ class Player extends ReLogoTurtle {
 	def setLeader(boolean leader){
 		this.leader = leader
 	}
+	
 	def chooseTeam(){
 		if (leader == true){
 				
@@ -32,8 +33,12 @@ class Player extends ReLogoTurtle {
 		}
 	}
 	
-	def voteForTeam(String label){
-		this.label = label
+	def voteForTeam(){
+		System.out.println("Volgende!")
+		for (connection in myOutTrustLinks()){
+			System.out.println("Hier is de trustvalue")
+			System.out.println(connection.getTrustValue().toString())
+		}
 	}
 	
 	def voteResultMission(){
