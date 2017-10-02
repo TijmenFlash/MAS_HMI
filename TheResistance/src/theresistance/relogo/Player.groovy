@@ -32,8 +32,8 @@ class Player extends ReLogoTurtle {
 		}
 	}
 	
-	def voteForTeam(){
-		//conflicting comment hah
+	def voteForTeam(String label){
+		this.label = label
 	}
 	
 	def voteResultMission(){
