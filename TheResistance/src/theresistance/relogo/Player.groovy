@@ -25,7 +25,6 @@ class Player extends ReLogoTurtle {
 	def setLeader(boolean leader){
 		this.leader = leader
 	}
-	//dit is een test
 	def chooseTeam(){
 		if (leader == true){
 			
