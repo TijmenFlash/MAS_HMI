@@ -34,7 +34,7 @@ class UserObserver extends ReLogoObserver{
 			if (spyCount < 2 & (spyChance == 0 |(count == maxPlayers & spyCount != 2) |(count == 4 & spyCount==0)))  {
 				setRole("Spy");
 				spyCount+=1
-				shape = "zombies"
+				shape = "zombie"
 			}else{
 				setRole("Resistance")
 				shape = "person"
