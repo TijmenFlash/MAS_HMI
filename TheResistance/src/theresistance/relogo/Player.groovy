@@ -16,15 +16,7 @@ class Player extends ReLogoTurtle {
 	private int order
 	private boolean leader = false
 	
-	def setRole(String role){
-		this.role = role;
-	}
-	def setOrder(int order){
-		this.order = order
-	}
-	def setLeader(boolean leader){
-		this.leader = leader
-	}
+
 	
 	def chooseTeam(){
 		if (leader == true){
@@ -36,12 +28,37 @@ class Player extends ReLogoTurtle {
 	def voteForTeam(){
 		System.out.println("Volgende!")
 		for (connection in myOutTrustLinks()){
-			System.out.println("Hier is de trustvalue")
-			System.out.println(connection.getTrustValue().toString())
+			ask(connection){String p = getEnd2().getRole()
+				String x = getEnd2().getOrder()
+				System.out.println(p + " " + x)
+			}
 		}
 	}
 	
 	def voteResultMission(){
 		
 	}
+	
+	
+	// set and get functions
+	def setRole(String role){
+		this.role = role;
+	}
+	def getRole(){
+		return role;
+	}
+	def setOrder(int order){
+		this.order = order
+	}
+	
+	def getOrder(){
+		return order
+	}
+	def setLeader(boolean leader){
+		this.leader = leader
+	}
+	def getLeader(){
+		return leader
+	}
+	
 }
