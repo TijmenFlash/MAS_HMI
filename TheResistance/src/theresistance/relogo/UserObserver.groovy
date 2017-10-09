@@ -2,9 +2,12 @@ package theresistance.relogo
 
 import static repast.simphony.relogo.Utility.*;
 import static repast.simphony.relogo.UtilityG.*;
-import repast.simphony.relogo.Stop;
+import repast.simphony.relogo.AgentSet
+import repast.simphony.relogo.Stop
+import repast.simphony.relogo.Turtle;
 import repast.simphony.relogo.Utility;
-import repast.simphony.relogo.UtilityG;
+import repast.simphony.relogo.UtilityG
+import repast.simphony.relogo.builder.ReLogoBuilderGeneratedFor;
 import repast.simphony.relogo.schedule.Go;
 import repast.simphony.relogo.schedule.Setup;
 import theresistance.ReLogoObserver;
@@ -75,16 +78,50 @@ class UserObserver extends ReLogoObserver{
 	def go(){
 		System.out.println("Go!")
 		ask(players()){voteForTeam()}
-		ask(players()){
-			chooseTeam(2)
+		def chosen = false;
+		AgentSet<Player> team;
+		
+		
+		while(chosen == false){
+		// while there is no team
+		// ask leader to choose a team with a specific nr of players
+			System.out.println("choose leader")
+		ask(getLeader()){
+			team = chooseTeam(2)
 		}
 		
+		System.out.println("vote for team")
+		def votes = [0];
+		ask(players()){
+			// ask all players to vote on the team
+			votes.add(voteForTeam(team));
+			
+		}
+		System.out.println("The sum = " + votes.value.sum() )
+		if (votes.value.sum() > 2){
+			
+			chosen = true;
+		}
+		
+		}
+		System.out.println("The end" )
 		
 		ask(players()){
 			
 		}
 	}
 	
+	
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Player")
+	public theresistance.relogo.Player getLeader(){
+		
+		for (i in players()){
+			if (i.getLeader() == true){
+			return i;
+			}
+		}
+		
+	}
 	/**
 		@Go
 		def go(){

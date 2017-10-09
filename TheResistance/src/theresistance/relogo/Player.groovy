@@ -23,24 +23,31 @@ class Player extends ReLogoTurtle {
 	
 	def chooseTeam(int teamSize){
 		if (leader == true){
-			System.out.println("Volgende!")
-			//Collections.sort(myOutTrustLinks(), Comparator.comparingDouble(getTrustValue()))
+//			System.out.println("Volgende!")
+//			//Collections.sort(myOutTrustLinks(), Comparator.comparingDouble(getTrustValue()))
+//			
+//			for (connection in myOutTrustLinks()){
+//				ask(connection){String p = getEnd2().getRole()
+//					String x = getEnd2().getOrder()
+//					String y = getTrustValue()
+//					System.out.println(p + " " + x +" "+ y)
+//				}
+//			}
+			System.out.println("I am the leader! " + order )
 			
-			for (connection in myOutTrustLinks()){
-				ask(connection){String p = getEnd2().getRole()
-					String x = getEnd2().getOrder()
-					String y = getTrustValue()
-					System.out.println(p + " " + x +" "+ y)
-				}
-			}
-			Player test = getPlayerwithLargestTV(myOutTrustLinks(), 1);
-			System.out.println("Order of max = " + test.getOrder().toString());
-			
-			
+			//determine the team
+			//Player test = getPlayerwithLargestTV(myOutTrustLinks(), 1);
+			//System.out.println("Order of max = " + test.getOrder().toString());
 			
 			AgentSet<theresistance.relogo.Player> team = new ArrayList()
 			team.add(this)
-			
+			team.add(getPlayerwithLargestTV(myOutTrustLinks(), 1))
+			if (teamSize == 3){
+				team.add(getPlayerwithLargestTV(myOutTrustLinks(), 2))
+			}
+		return team
+		}else{
+		return null
 		}
 	}
 	
@@ -76,8 +83,9 @@ class Player extends ReLogoTurtle {
 
 	 
 	
-	def voteForTeam(){
-		
+	def voteForTeam(AgentSet<Player> team){
+		System.out.println("I voted " + 1 + "and I am  " + order)
+		return 1;
 	}
 	
 	def voteResultMission(){
