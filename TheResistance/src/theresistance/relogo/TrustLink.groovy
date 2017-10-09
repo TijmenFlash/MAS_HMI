@@ -3,7 +3,9 @@ package theresistance.relogo
 import static repast.simphony.relogo.Utility.*;
 import static repast.simphony.relogo.UtilityG.*;
 
-import repast.simphony.relogo.Plural;
+import repast.simphony.relogo.AgentSet;
+import repast.simphony.relogo.Plural
+import repast.simphony.relogo.ReLogoAgent;
 import repast.simphony.relogo.Stop;
 import repast.simphony.relogo.Utility;
 import repast.simphony.relogo.UtilityG;
@@ -38,4 +40,7 @@ class TrustLink extends ReLogoLink {
 		}
 	}
 	
+	
+	
 }
+
