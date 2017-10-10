@@ -18,8 +18,36 @@ class Player extends ReLogoTurtle {
 	private boolean leader = false
 	private Array
 	
-	
 
+	def communicate(){
+		if (leader == true){
+			//find most trusted player
+			String mostTrustedPlayer = getPlayerwithLargestTV(myOutTrustLinks(), 1);	
+			//find trust in most trusted player
+			float trustInMostTrustedPlayer = myOutTrustLinks()[Integer.parseInt(mostTrustedPlayer[7])].getTrustValue();
+			//find least trusted player
+			String leastTrustedPlayer = getPlayerWithLowestTV(myOutTrustLinks());
+			//find trust in least trusted player
+			float trustInLeastTrustedPlayer = myOutTrustLinks()[Integer.parseInt(leastTrustedPlayer[7])].getTrustValue();
+			//find mostTrustedPlayer's trust in least trusted player
+			float mostTrustedPlayersTrustInLeastTrustedPlayer
+			for(int i=0;i<trustLinks().size();i++){	
+				if(trustLinks()[i].toString()[10] == mostTrustedPlayer[7]){
+					if(trustLinks()[i].toString()[12] == leastTrustedPlayer[7]){
+						mostTrustedPlayersTrustInLeastTrustedPlayer = trustLinks()[i].getTrustValue();
+					}
+				}
+			}			
+			System.out.println(myOutTrustLinks());
+			System.out.println("most trusted: (" + mostTrustedPlayer +"): " + trustInMostTrustedPlayer);
+			System.out.println("least trusted: (" + leastTrustedPlayer +"): " + trustInLeastTrustedPlayer);
+			System.out.println(mostTrustedPlayer + " trusts " + leastTrustedPlayer + ": " + mostTrustedPlayersTrustInLeastTrustedPlayer);
+			
+			//TODO
+			//adjust own trustLink according to formula
+		}
+	}
+	
 	
 	def chooseTeam(int teamSize){
 		if (leader == true){
@@ -49,6 +77,13 @@ class Player extends ReLogoTurtle {
 		}else{
 		return null
 		}
+	}
+	
+	public Player getPlayerWithLowestTV(AgentSet<TrustLink> trustLinkSet){
+		def list = trustLinkSet;
+		list.sort({m1, m2 -> m1.trustValue <=> m2.trustValue})		
+		return list[1].getEnd2()
+		//beacuse list[0] is self
 	}
 	
 	public Player getPlayerwithLargestTV(AgentSet<TrustLink> trustLinkSet, int nr) {

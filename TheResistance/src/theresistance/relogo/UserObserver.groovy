@@ -77,6 +77,10 @@ class UserObserver extends ReLogoObserver{
 	@Go
 	def go(){
 		System.out.println("Go!")
+		System.out.println("Communicate!")
+		ask(players()){communicate()}
+		
+		System.out.println("Vote for team!")
 		ask(players()){voteForTeam()}
 		def chosen = false;
 		AgentSet<Player> team;
