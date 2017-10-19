@@ -92,5 +92,9 @@ class Game extends ReLogoTurtle {
 		missionSucceed++;
 	}
 	
+	def getMissionSucceed(){
+		return missionSucceed;
+	}
+	
 	
 }
