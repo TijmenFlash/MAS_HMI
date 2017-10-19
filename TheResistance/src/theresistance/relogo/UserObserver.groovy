@@ -23,11 +23,16 @@ class UserObserver extends ReLogoObserver{
 		int xcor = 1;
 		int ycor = 1;
 		TrustLink l;
-		int gameRound = 1
 		double testValue = 1;
 		int maxPlayers = 5;
 		int count = 1;
 		int spyCount = 0;
+		Random generator = new Random();
+		
+		createGames(1){
+			
+		}
+		
 		
 		// create maximum number of players
 		createPlayers(maxPlayers){
@@ -47,26 +52,34 @@ class UserObserver extends ReLogoObserver{
 			//determine the player order
 			setOrder(order);
 			if (order ==1){
-				setLeader(true)
+				setLeader(true);
 				label = order.toString() + "*"
+				ask(games()){
+					setNewLeader()
+				}
 			}else{
 				label = order.toString();
 			}
+			//set ID and leader order
+			order = order+1
+			// also tells this to the game
+			
+			
+			
+			//set players initial trust values
+			for (player in players()){
+				testValue = generator.nextDouble()
+				if (player.getOrder() != getOrder()){
+					l = createTrustLinkTo(player)
+					l.setTrustValue(testValue)
+				}
+				
+			}
+			//testValue = 1;
 			
 			//visualisation
 			size = 4
-			
 			setxy(randomXcor(), randomYcor())
-			
-			//xcor+=2; ycor+=2;
-			order = order+1
-			
-			for (player in players()){
-				testValue-=0.2
-				l = createTrustLinkTo(player)
-				l.setTrustValue(testValue + random(1)/10)
-			}
-			testValue = 1;
 		}
 		
 		
@@ -76,56 +89,102 @@ class UserObserver extends ReLogoObserver{
 	
 	@Go
 	def go(){
+		//define initial variables
+		def chosen = false
+		def leader= [];
+		def List team;
+		// start round!
 		System.out.println("Go!")
+		
+		// first the leader is allowed to communicate
 		System.out.println("Communicate!")
-		ask(players()){communicate()}
+		for (game in games()){
+			leader.add( game.getLeader())
+		}
 		
-		System.out.println("Vote for team!")
-		ask(players()){voteForTeam()}
-		def chosen = false;
-		AgentSet<Player> team;
+		println leader;
+		ask(leader[0]){communicate()}
 		
 		
-		while(chosen == false){
 		// while there is no team
-		// ask leader to choose a team with a specific nr of players
-			System.out.println("choose leader")
-		ask(getLeader()){
-			team = chooseTeam(2)
+		while(chosen == false){
+			// ask leader to choose a team with a specific nr of players
+			System.out.println("choose team")
+			
+			def int teamSize;
+			for (g in games()){
+				teamSize = g.getTeamSize()
+			}
+			println teamSize
+			team = leader[0].chooseTeam(teamSize);
+			println team
+			//after the leader has chosen a team, other players will vote in favor of or against the team
+			System.out.println("vote for team!")
+			
+			//collect votes
+			def votes = [0];
+			ask(players()){
+				// ask all players to vote on the team
+				votes.add(voteForTeam(team));
+			}
+			//if a majority of the votes is in favor of the team, the team is chosen
+			System.out.println("The sum = " + votes.value.sum() )
+			if (votes.value.sum() > 2){
+				chosen = true;
+			}
+		}
+		// end while loop
+		
+		//the team is on mission, so ask them for their vote
+		def vote = 0;
+		ask(team){
+			vote = vote + voteResultMission()
 		}
 		
-		System.out.println("vote for team")
-		def votes = [0];
-		ask(players()){
-			// ask all players to vote on the team
-			votes.add(voteForTeam(team));
+		// if the mission has not succeeded:
+		if (vote != 0){
+			updateMissionStatus("failed");
+			// update trustvalues of each player
 			
-		}
-		System.out.println("The sum = " + votes.value.sum() )
-		if (votes.value.sum() > 2){
-			
-			chosen = true;
-		}
+		//if the mission has succeeded	
+		}else{
+			// ask game to record this
+			updateMissionStatus('succeed');
+			// update trustvalues of each player
 		
 		}
-		System.out.println("The end" )
 		
-		ask(players()){
-			
-		}
+		//continue with the next round
+		ask(games()){
+				println getMissionStatus();
+				increaseMissionRound();
+				setNewLeader();
+			}
+		
+		
+		
 	}
 	
-	
-	@ReLogoBuilderGeneratedFor("theresistance.relogo.Player")
-	public theresistance.relogo.Player getLeader(){
-		
-		for (i in players()){
-			if (i.getLeader() == true){
-			return i;
+	def updateMissionStatus(String status){
+		ask(games()){
+			addMissionStatus(status);
+			if (status == "succeed"){
+				increaseMissionSucceed();
 			}
 		}
 		
 	}
+	
+//	@ReLogoBuilderGeneratedFor("theresistance.relogo.Player")
+//	public theresistance.relogo.Player getLeader(){
+//		
+//		for (i in players()){
+//			if (i.getLeader() == true){
+//			return i;
+//			}
+//		}
+//		
+//	}
 	/**
 		@Go
 		def go(){

@@ -15,6 +15,119 @@ import repast.simphony.relogo.builder.ReLogoBuilderGeneratedFor;
 public class ReLogoLink<T> extends BaseLink<T>	{
 
 	/**
+	 * Returns an agentset of games on a given patch.
+	 * 
+	 * @param p
+	 *            a patch
+	 * @return agentset of games on patch p
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public AgentSet<theresistance.relogo.Game> gamesOn(Patch p){
+		AgentSet<theresistance.relogo.Game> result = new AgentSet<theresistance.relogo.Game>();						
+		for (Turtle t : Utility.getTurtlesOnGridPoint(p.getGridLocation(),getMyObserver(),"game")){
+			if (t instanceof theresistance.relogo.Game)
+			result.add((theresistance.relogo.Game)t);
+		}
+		return result;
+	}
+
+	/**
+	 * Returns an agentset of games on the same patch as a turtle.
+	 * 
+	 * @param t
+	 *            a turtle
+	 * @return agentset of games on the same patch as turtle t
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public AgentSet<theresistance.relogo.Game> gamesOn(Turtle t){
+		AgentSet<theresistance.relogo.Game> result = new AgentSet<theresistance.relogo.Game>();						
+		for (Turtle tt : Utility.getTurtlesOnGridPoint(Utility.ndPointToGridPoint(t.getTurtleLocation()),getMyObserver(),"game")){
+			if (tt instanceof theresistance.relogo.Game)
+			result.add((theresistance.relogo.Game)tt);
+		}
+		return result;
+	}
+
+	/**
+	 * Returns an agentset of games on the patches in a collection or on the patches
+	 * that a collection of turtles are.
+	 * 
+	 * @param a
+	 *            a collection
+	 * @return agentset of games on the patches in collection a or on the patches
+	 *         that collection a turtles are
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public AgentSet<theresistance.relogo.Game> gamesOn(Collection c){
+
+		if (c == null || c.isEmpty()){
+			return new AgentSet<theresistance.relogo.Game>();
+		}
+
+		Set<theresistance.relogo.Game> total = new HashSet<theresistance.relogo.Game>();
+		if (c.iterator().next() instanceof Turtle){
+			for (Object o : c){
+				if (o instanceof Turtle){
+					Turtle t = (Turtle) o;
+					total.addAll(gamesOn(t));
+				}
+			}
+		}
+		else {
+			for (Object o : c){
+				if (o instanceof Patch){
+					Patch p = (Patch) o;
+					total.addAll(gamesOn(p));
+				}
+			}
+		}
+		return new AgentSet<theresistance.relogo.Game>(total);
+	}
+
+	/**
+	 * Queries if object is a game.
+	 * 
+	 * @param o
+	 *            an object
+	 * @return true or false based on whether the object is a game
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public boolean isGameQ(Object o){
+		return (o instanceof theresistance.relogo.Game);
+	}
+
+	/**
+	 * Returns the game with the given who number.
+	 * 
+	 * @param number
+	 *            a number
+	 * @return turtle number
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public theresistance.relogo.Game game(Number number){
+		Turtle turtle = Utility.turtleU(number.intValue(), getMyObserver());
+		if (turtle instanceof theresistance.relogo.Game)
+			return (theresistance.relogo.Game) turtle;
+		return null;
+	}
+
+	/**
+	 * Returns an agentset containing all games.
+	 * 
+	 * @return agentset of all games
+	 */
+	@ReLogoBuilderGeneratedFor("theresistance.relogo.Game")
+	public AgentSet<theresistance.relogo.Game> games(){
+		AgentSet<theresistance.relogo.Game> a = new AgentSet<theresistance.relogo.Game>();
+		for (Object e : this.getMyObserver().getContext().getObjects(theresistance.relogo.Game.class)) {
+			if (e instanceof theresistance.relogo.Game){
+				a.add((theresistance.relogo.Game)e);
+			}
+		}
+		return a;
+	}
+
+	/**
 	 * Returns an agentset of players on a given patch.
 	 * 
 	 * @param p
