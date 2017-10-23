@@ -67,7 +67,7 @@ class UserObserver extends ReLogoObserver{
 			//set players initial trust values
 			for (player in players()){
 				//testValue = generator.nextDouble()
-				testValue = 0.5;
+				testValue = 0.5 + generator.nextDouble()/10.0;
 				if (player.getOrder() != getOrder()){
 					l = createTrustLinkTo(player)
 					l.setTrustValue(testValue)
@@ -92,6 +92,7 @@ class UserObserver extends ReLogoObserver{
 		def chosen = false
 		def leader= [];
 		def List team;
+		def boolean timeout = false;
 		// start round!
 		System.out.println("Go!")
 
@@ -108,7 +109,10 @@ class UserObserver extends ReLogoObserver{
 			teamSize = g.getTeamSize()
 		}
 		// while there is no team
+		int count = 0;
 		while(chosen == false){
+			println "current count = " + count
+			count++;
 			// ask leader to choose a team with a specific nr of players
 			System.out.println("choose team")
 
@@ -117,45 +121,65 @@ class UserObserver extends ReLogoObserver{
 			println team
 			//after the leader has chosen a team, other players will vote in favor of or against the team
 			System.out.println("vote for team!")
-
+			ask(leader[0]){
+				for (t in myOutTrustLinks()){
+					print t.getEnd2().toString() + " " + t.getTrustValue() + " " 
+					
+				}
+				println ""
+			}
 			//collect votes
 			def votes = [0];
 			ask(players()){
 				// ask all players to vote on the team
-				votes.add(voteForTeam(team));
+				votes.add(voteForTeam(team, count));
 			}
 			//if a majority of the votes is in favor of the team, the team is chosen
 			System.out.println("The sum = " + votes.value.sum() )
 			if (votes.value.sum() > 2){
 				chosen = true;
+			}else if (count >= 4){
+				chosen = true;
+				timeout = true;
+			}else{
+				// otherwise a new leader is selected
+				ask(games()){
+					setNewLeader();
+				}
 			}
 		}
 		// end while loop
 
-		//the team is on mission, so ask them for their vote
-		def vote = 0;
-		ask(team){
-			vote = vote + voteResultMission()
-		}
-		
-		// if the mission has not succeeded:
-		if (vote != 0){
+		if (timeout == false){
+			//the team is on mission, so ask them for their vote
+			def vote = 0;
+			ask(team){
+				vote = vote + voteResultMission()
+			}
+
+			// if the mission has not succeeded:
+			if (vote != 0){
+				updateMissionStatus("failed");
+				// update trustvalues of each player
+				// set alphabeta value for failed based on teamsize:
+				ask(players()){
+					updateTrustValueBasedonDO(team, "failed");
+				}
+				//if the mission has succeeded
+			}else{
+				// ask game to record this
+				updateMissionStatus('succeed');
+				// update trustvalues of each player
+				ask(players()){
+					updateTrustValueBasedonDO(team, "succeed");
+				}
+			}
+		}else{
+			println "Failed due to timeout"
 			updateMissionStatus("failed");
 			// update trustvalues of each player
 			// set alphabeta value for failed based on teamsize:
-			ask(players()){
-				updateTrustValueBasedonDO(team, "failed");
-			}
-			//if the mission has succeeded
-		}else{
-			// ask game to record this
-			updateMissionStatus('succeed');
-			// update trustvalues of each player
-			ask(players()){
-				updateTrustValueBasedonDO(team, "succeed");
-			}
 		}
-
 		boolean endrun = false;
 		//continue with the next round
 		ask(games()){
@@ -166,18 +190,19 @@ class UserObserver extends ReLogoObserver{
 				endrun = true;
 			}
 		}
-	
+
 		if (endrun == true){
 			println "END OF GAME"
 			RunEnvironment.getInstance().endRun();
-		}
 
-		ask(games()){
-			println getMissionStatus()
-			if (getMissionSucceed() >= 3){
-				println "The winners are the resistance!"
-			} else{
-				println "The winners are the spies!"
+
+			ask(games()){
+				println getMissionStatus()
+				if (getMissionSucceed() >= 3){
+					println "The winners are the resistance!"
+				} else{
+					println "The winners are the spies!"
+				}
 			}
 		}
 	}

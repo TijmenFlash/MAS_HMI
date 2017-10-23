@@ -721,5 +721,173 @@ public class ReLogoPatch extends BasePatch{
 		return userLink(oneEnd.getWho(), otherEnd.getWho());
 	}
 
+	/**
+	 * Returns the value of the global variable DI_f_2.
+	 *
+	 * @return the value of the global variable DI_f_2
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_f_2")
+	public Object getDI_f_2(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DI_f_2");
+	}
+
+	/**
+	 * Sets the value of the global variable DI_f_2.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_f_2")
+	public void setDI_f_2(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DI_f_2",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DI_f_3.
+	 *
+	 * @return the value of the global variable DI_f_3
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_f_3")
+	public Object getDI_f_3(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DI_f_3");
+	}
+
+	/**
+	 * Sets the value of the global variable DI_f_3.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_f_3")
+	public void setDI_f_3(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DI_f_3",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DI_s_2.
+	 *
+	 * @return the value of the global variable DI_s_2
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_s_2")
+	public Object getDI_s_2(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DI_s_2");
+	}
+
+	/**
+	 * Sets the value of the global variable DI_s_2.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_s_2")
+	public void setDI_s_2(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DI_s_2",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DI_s_3.
+	 *
+	 * @return the value of the global variable DI_s_3
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_s_3")
+	public Object getDI_s_3(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DI_s_3");
+	}
+
+	/**
+	 * Sets the value of the global variable DI_s_3.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_s_3")
+	public void setDI_s_3(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DI_s_3",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DO_f_2.
+	 *
+	 * @return the value of the global variable DO_f_2
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_f_2")
+	public Object getDO_f_2(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DO_f_2");
+	}
+
+	/**
+	 * Sets the value of the global variable DO_f_2.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_f_2")
+	public void setDO_f_2(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DO_f_2",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DO_f_3.
+	 *
+	 * @return the value of the global variable DO_f_3
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_f_3")
+	public Object getDO_f_3(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DO_f_3");
+	}
+
+	/**
+	 * Sets the value of the global variable DO_f_3.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_f_3")
+	public void setDO_f_3(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DO_f_3",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DO_s_2.
+	 *
+	 * @return the value of the global variable DO_s_2
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_s_2")
+	public Object getDO_s_2(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DO_s_2");
+	}
+
+	/**
+	 * Sets the value of the global variable DO_s_2.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_s_2")
+	public void setDO_s_2(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DO_s_2",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DO_s_3.
+	 *
+	 * @return the value of the global variable DO_s_3
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_s_3")
+	public Object getDO_s_3(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DO_s_3");
+	}
+
+	/**
+	 * Sets the value of the global variable DO_s_3.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_s_3")
+	public void setDO_s_3(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DO_s_3",value);
+	}
+
 
 }

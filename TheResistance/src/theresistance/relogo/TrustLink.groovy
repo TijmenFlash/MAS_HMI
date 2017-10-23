@@ -15,32 +15,32 @@ import theresistance.ReLogoLink;
 
 class TrustLink extends ReLogoLink {
 	//trust class
-	
+
 	private double trustValue = 0;
 	private int playerNr;
-	
+
 	def getPlayerNr(){
 		return playerNr;
 	}
-	
+
 	def setPlayerNr(int player){
 		playerNr = player;
 	}
-	
+
 	def getTrustValue(){
 		return trustValue;
 	}
-	
+
 	def setTrustValue(double trust){
 		trustValue = trust;
 		if (trust >0.5){
-		setColor(55);
+			setColor(55);
 		} else{
-		setColor(15);
+			setColor(15);
 		}
 	}
-	
-	
-	
+
+
+
 }
 

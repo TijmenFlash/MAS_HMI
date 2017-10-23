@@ -23,6 +23,14 @@ public class UserGlobalsAndPanelFactory extends AbstractReLogoGlobalsAndPanelFac
 	        addStateChangeButtonWL("changeSomething","Change Something")
 	        
 		 */
-
+		// Slider with label ( variable name, slider label, minimum value, increment, maximum value, initial value )
+		addSliderWL("DI_f_2", "Direct Interaction Failed 2", -1, 0.1, 0, -0.99)
+		addSliderWL("DI_f_3", "Direct Interaction Failed 3", -1, 0.1, 0, -0.1)
+		addSliderWL("DI_s_2", "Direct Interaction Succeed 2", 0, 0.1, 1, 0.4)
+		addSliderWL("DI_s_3", "Direct Interaction Succeed 3", 0, 0.1, 1, 0.1)
+		addSliderWL("DO_f_2", "Direct Observation Failed 2", -1, 0.1, 0, -0.2)
+		addSliderWL("DO_f_3", "Direct Observation Failed 3", -1, 0.1, 0, -0.1)
+		addSliderWL("DO_s_2", "Direct Observation Succeed 2", 0, 0.1, 1, 0.2)
+		addSliderWL("DO_s_3", "Direct Observation Succeed 3", 0, 0.1, 1, 0.1)
 	}
 }
