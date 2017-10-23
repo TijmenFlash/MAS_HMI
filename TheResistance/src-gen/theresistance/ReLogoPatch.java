@@ -722,6 +722,48 @@ public class ReLogoPatch extends BasePatch{
 	}
 
 	/**
+	 * Returns the value of the global variable DI_doublefail.
+	 *
+	 * @return the value of the global variable DI_doublefail
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_doublefail")
+	public Object getDI_doublefail(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DI_doublefail");
+	}
+
+	/**
+	 * Sets the value of the global variable DI_doublefail.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DI_doublefail")
+	public void setDI_doublefail(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DI_doublefail",value);
+	}
+
+	/**
+	 * Returns the value of the global variable DO_doublefail.
+	 *
+	 * @return the value of the global variable DO_doublefail
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_doublefail")
+	public Object getDO_doublefail(){
+		return repast.simphony.relogo.ReLogoModel.getInstance().getModelParam("DO_doublefail");
+	}
+
+	/**
+	 * Sets the value of the global variable DO_doublefail.
+	 *
+	 * @param value
+	 *            a value
+	 */
+	@ReLogoBuilderGeneratedFor("global: DO_doublefail")
+	public void setDO_doublefail(Object value){
+		repast.simphony.relogo.ReLogoModel.getInstance().setModelParam("DO_doublefail",value);
+	}
+
+	/**
 	 * Returns the value of the global variable DI_f_2.
 	 *
 	 * @return the value of the global variable DI_f_2

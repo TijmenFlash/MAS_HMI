@@ -24,6 +24,8 @@ public class UserGlobalsAndPanelFactory extends AbstractReLogoGlobalsAndPanelFac
 	        
 		 */
 		// Slider with label ( variable name, slider label, minimum value, increment, maximum value, initial value )
+		addSliderWL("DI_doublefail", "Direct Interaction Failed 2", -1, 0.1, 0, -0.99)
+		addSliderWL("DO_doublefail", "Direct Interaction Failed 2", -1, 0.1, 0, -0.6)
 		addSliderWL("DI_f_2", "Direct Interaction Failed 2", -1, 0.1, 0, -0.99)
 		addSliderWL("DI_f_3", "Direct Interaction Failed 3", -1, 0.1, 0, -0.1)
 		addSliderWL("DI_s_2", "Direct Interaction Succeed 2", 0, 0.1, 1, 0.4)

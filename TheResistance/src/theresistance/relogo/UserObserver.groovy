@@ -54,12 +54,12 @@ class UserObserver extends ReLogoObserver{
 			setOrder(order);
 			if (order ==1){
 				setLeader(true);
-				label = order.toString() + "*"
+				label = this.toString() + "*"
 				ask(games()){
 					setNewLeader()
 				}
 			}else{
-				label = order.toString();
+				label = toString();
 			}
 			//set ID and leader order
 			order = order+1
@@ -157,13 +157,16 @@ class UserObserver extends ReLogoObserver{
 				vote = vote + voteResultMission()
 			}
 
+			if (vote == 2){
+				println "double fail!"
+			}
 			// if the mission has not succeeded:
 			if (vote != 0){
 				updateMissionStatus("failed");
 				// update trustvalues of each player
 				// set alphabeta value for failed based on teamsize:
 				ask(players()){
-					updateTrustValueBasedonDO(team, "failed");
+					updateTrustValueBasedonDO(team, "failed", vote);
 				}
 				//if the mission has succeeded
 			}else{
@@ -171,7 +174,7 @@ class UserObserver extends ReLogoObserver{
 				updateMissionStatus('succeed');
 				// update trustvalues of each player
 				ask(players()){
-					updateTrustValueBasedonDO(team, "succeed");
+					updateTrustValueBasedonDO(team, "succeed", vote);
 				}
 			}
 		}else{
@@ -186,7 +189,8 @@ class UserObserver extends ReLogoObserver{
 			println getMissionStatus();
 			increaseMissionRound();
 			setNewLeader();
-			if (getMissionRound()==5){
+			def missionFail = getMissionRound() - getMissionSucceed();
+			if (getMissionRound()==5 | missionFail >=3 | getMissionSucceed() >=3){
 				endrun = true;
 			}
 		}
@@ -202,6 +206,13 @@ class UserObserver extends ReLogoObserver{
 					println "The winners are the resistance!"
 				} else{
 					println "The winners are the spies!"
+				}
+			}
+			
+			ask(players()){
+				println printMe() + " " + getRole()
+				for (t in myOutTrustLinks()){
+					println "My trust in " + t.getEnd2() + "(" + t.getEnd2().getRole()+ ")"+ " is " + t.getTrustValue()
 				}
 			}
 		}

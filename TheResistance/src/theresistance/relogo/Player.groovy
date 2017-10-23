@@ -26,11 +26,11 @@ class Player extends ReLogoTurtle {
 			System.out.println("I voted " + 1 + "and I am  " + this.toString())
 			return 1;
 		}
-		
+
 		if (team.contains(getPlayerwithLowestTV(myOutTrustLinks(), 1)) | team.contains(getPlayerwithLowestTV(myOutTrustLinks(), 2)  ) ){
 			System.out.println("I voted " + 0 + "and I am  " + this.toString())
 			return 0;
-			
+
 		}else {
 			System.out.println("I voted " + 1 + "and I am  " + this.toString())
 			return 1;
@@ -64,7 +64,7 @@ class Player extends ReLogoTurtle {
 				Player random = players().get(randomizer.nextInt(players().size()));
 				println random
 				if (random.getRole() != "Spy"){
-					team.add(random); 
+					team.add(random);
 					if (team.size() >= teamSize){
 						teamfull = true;
 					}
@@ -74,6 +74,9 @@ class Player extends ReLogoTurtle {
 		return team
 	}
 
+	def printMe(){
+		println this.toString();
+	}
 	def communicate(){
 		// the agent gets its most trusted friend and asks this friend for information about the other agents.
 		// the agent updates its own values depending on the trust it has in the receiver and the receivers trust in the other agents
@@ -118,7 +121,7 @@ class Player extends ReLogoTurtle {
 	}
 
 
-	def updateTrustValueBasedonDO(AgentSet<Player> team, String missionStatus){
+	def updateTrustValueBasedonDO(AgentSet<Player> team, String missionStatus, int vote){
 		def ab;
 		// if the mission has succeeded
 		if (missionStatus == "succeed"){
@@ -150,26 +153,40 @@ class Player extends ReLogoTurtle {
 		} else{
 			// if the player is part of the team
 			if (team.contains(this)){
-				// and the teamSize is 2
-				if (team.size() == 2){
-					// then
-					//ab = -0.99;
-					ab = DI_f_2
-				} else {
-					// if team size == 3:
-					//ab = -0.1;
-					ab = DI_f_3
+				if (vote == 2 ){
+					ab = DI_doublefail;
+				}else{
+					// and the teamSize is 2
+					if (team.size() == 2){
+						// then
+						//ab = -0.99;
+						ab = DI_f_2
+					} else {
+						// if team size == 3:
+						//ab = -0.1;
+						ab = DI_f_3
+					}
 				}
 				// if the players is NOT part of the team
 			} else {
+
 				if (team.size() == 2){
-					// then
-					//					ab = -0.2;
-					ab = DO_f_2
+					if (vote == 2){
+						ab = DI_doublefail;
+					}else{
+						// then
+						//					ab = -0.2;
+						ab = DO_f_2
+					}
 				} else {
 					// if team size == 3:
 					//ab = -0.1;
-					ab = DO_f_3
+					if (vote == 2){
+						ab = DO_doublefail;
+					}	else{
+						ab = DO_f_3
+					}
+
 				}
 			}
 		}
@@ -209,8 +226,9 @@ class Player extends ReLogoTurtle {
 					if (newValue >=1){
 						newValue  = 0.99;
 					}
+					tp = (tp/2.0) +0.5;
 					trustLink(this, link.getEnd2()).setTrustValue(newValue);
-					println "I am: " + this.toString() + " and I update " + p.toString() + " with " + newValue;
+					println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
 
 				}
 			}
@@ -243,9 +261,9 @@ class Player extends ReLogoTurtle {
 					if (newValue >=1){
 						newValue  = 0.99;
 					}
-
+					tp = (tp/2.0) +0.5;
 					trustLink(this, link.getEnd2()).setTrustValue(newValue);
-					println "I am: " + this.toString() + " and I update " + p.toString() + " with " + newValue;
+					println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
 
 				}
 			}
@@ -271,7 +289,7 @@ class Player extends ReLogoTurtle {
 		return index;
 	}
 
-	
+
 	public Player getPlayerwithLargestTV(AgentSet<TrustLink> trustLinkSet, Integer nr) {
 		def list = trustLinkSet;
 		list.sort({m1, m2 -> m1.trustValue <=> m2.trustValue})
@@ -286,7 +304,7 @@ class Player extends ReLogoTurtle {
 		return index;
 	}
 
-	
+
 	// set and get functions
 	def AgentSet<TrustLink> adjustTrustValue(){
 
