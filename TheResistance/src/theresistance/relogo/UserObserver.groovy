@@ -16,7 +16,11 @@ import repast.simphony.engine.environment.RunEnvironment;
 class UserObserver extends ReLogoObserver{
 	/**
 	 * setup the initial state of the game
+	 * 
+	 * 
 	 */
+	def winner;
+
 	@Setup
 	def Setup(){
 		clearAll()
@@ -52,15 +56,33 @@ class UserObserver extends ReLogoObserver{
 
 			//determine the player order
 			setOrder(order);
-			if (order ==1){
+
+			if(order==1){
+				setxy(0, 10)
 				setLeader(true);
-				label = this.toString() + "*"
+				label = "agent"
 				ask(games()){
 					setNewLeader()
 				}
-			}else{
-				label = toString();
 			}
+			if(order==2){
+				setxy(12, 2)
+				label = "agent"
+			}
+			if(order==3){
+				setxy(7, -11)
+				label = "agent"
+			}
+			if(order==4){
+				setxy(-7, -11)
+				label = "agent"
+			}
+			if(order==5){
+				setxy(-12, 2)
+				label = "agent"
+			}
+
+
 			//set ID and leader order
 			order = order+1
 
@@ -78,7 +100,7 @@ class UserObserver extends ReLogoObserver{
 
 			//visualisation
 			size = 4
-			setxy(randomXcor(), randomYcor())
+			//setxy(randomXcor(), randomYcor())
 		}
 
 
@@ -123,8 +145,8 @@ class UserObserver extends ReLogoObserver{
 			System.out.println("vote for team!")
 			ask(leader[0]){
 				for (t in myOutTrustLinks()){
-					print t.getEnd2().toString() + " " + t.getTrustValue() + " " 
-					
+					print t.getEnd2().toString() + " " + t.getTrustValue() + " "
+
 				}
 				println ""
 			}
@@ -203,12 +225,20 @@ class UserObserver extends ReLogoObserver{
 			ask(games()){
 				println getMissionStatus()
 				if (getMissionSucceed() >= 3){
+					ask(games()){
+						setWinner("Resistance")
+					}
+					setWinner("Resistance")
 					println "The winners are the resistance!"
 				} else{
+					ask(games()){
+						setWinner("Spy")
+					}
+					setWinner("Spy")
 					println "The winners are the spies!"
 				}
 			}
-			
+
 			ask(players()){
 				println printMe() + " " + getRole()
 				for (t in myOutTrustLinks()){
@@ -226,6 +256,14 @@ class UserObserver extends ReLogoObserver{
 			}
 		}
 
+	}
+
+	def setWinner(String winner){
+		this.winner = winner;
+	}
+
+	def getWinner(){
+		return winner;
 	}
 
 	//	@ReLogoBuilderGeneratedFor("theresistance.relogo.Player")

@@ -23,12 +23,13 @@ class Game extends ReLogoTurtle {
 	def missionRound = 0;
 	List<Integer> maxTeam = Arrays.asList(2, 3, 2, 3, 3);
 	def currentOrder = 0;
+	def winner = "empty";
 
 
 	def setLeader(Player leader){
 		this.leader = leader;
 	}
-
+	
 	def setNewLeader(){
 		increaseCurrentOrder();
 		println "the current order is:" + currentOrder
@@ -40,6 +41,14 @@ class Game extends ReLogoTurtle {
 		}
 	}
 
+	def getWinner(){
+		return winner;
+	}
+	
+	def setWinner(String winner){
+		this.winner = winner;
+	}
+	
 	def increaseCurrentOrder(){
 
 		if (currentOrder == 4){

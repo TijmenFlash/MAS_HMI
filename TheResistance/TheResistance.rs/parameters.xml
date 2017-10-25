@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <parameters>
+	<parameter name="randomSeed" displayName="Default Random Seed" type="int" defaultValue="__NULL__" /><parameter name="default_observer_minPxcor" displayName="default_observer_minPxcor" type="int" defaultValue="-16" /><parameter name="default_observer_maxPxcor" displayName="default_observer_maxPxcor" type="int" defaultValue="16" /><parameter defaultValue="-0.99" name="DI_doublefail" type="double" displayName="DI_doublefail"></parameter>
 
-	<parameter name="randomSeed" displayName="Default Random Seed" type="int" defaultValue="__NULL__" />
-	<parameter name="default_observer_minPxcor" displayName="default_observer_minPxcor" type="int" defaultValue="-16"/>
-	<parameter name="default_observer_maxPxcor" displayName="default_observer_maxPxcor" type="int" defaultValue="16"/>
+	
+	
+	<parameter
+		defaultValue="-0.6" displayName="DO_doublefail" name="DO_doublefail" type="double">
+</parameter>
+	<parameter defaultValue="-0.99" displayName="DI_f_2" name="DI_f_2" type="double"></parameter>
+	<parameter defaultValue="-0.1" displayName="DI_f_3" name="DI_f_3" type="double"></parameter>
+	<parameter displayName="DI_s_2" defaultValue="0.4" name="DI_s_2" type="double"></parameter>
+	<parameter defaultValue="0.1" displayName="DI_s_3" name="DI_s_3" type="double"></parameter>
+	<parameter defaultValue="-0.2" displayName="DO_f_2" name="DO_f_2" type="double"></parameter>
+	<parameter defaultValue="-0.1" displayName="DO_f_3" name="DO_f_3" type="double"></parameter>
+	<parameter defaultValue="0.2" displayName="DO_s_2" name="DO_s_2" type="double"></parameter>
+	<parameter defaultValue="0.1" displayName="DO_s_3" name="DO_s_3" type="double"></parameter>
 	<parameter name="default_observer_minPycor" displayName="default_observer_minPycor" type="int" defaultValue="-16"/>
 	<parameter name="default_observer_maxPycor" displayName="default_observer_maxPycor" type="int" defaultValue="16"/>
 

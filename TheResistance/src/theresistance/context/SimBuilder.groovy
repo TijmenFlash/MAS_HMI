@@ -29,7 +29,7 @@ public class SimBuilder implements ContextBuilder {
         }
 		 
 		Parameters p = RunEnvironment.getInstance().getParameters();
-		
+		println p;
 		// NOTE: minPxcor and minPycor must be <= 0
 		int minPxcor = p.getValue("default_observer_minPxcor");
 		int maxPxcor = p.getValue("default_observer_maxPxcor");
