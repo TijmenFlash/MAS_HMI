@@ -135,7 +135,8 @@ class Player extends ReLogoTurtle {
 				} else {
 					// if team size == 3:
 					//ab = 0.1;
-					ab = DI_s_3
+				// ab = DI_s_3, but since DI_s_3 == DO_s_2, we use that
+					ab = DO_s_2
 				}
 				// if the players is NOT part of the team
 			} else {
@@ -164,7 +165,8 @@ class Player extends ReLogoTurtle {
 					} else {
 						// if team size == 3:
 						//ab = -0.1;
-						ab = DI_f_3
+						// ab = DI_f_3, but since DI_f_3 == DO_f_2, we use that
+						ab = DO_f_2
 					}
 				}
 				// if the players is NOT part of the team

@@ -1,0 +1,31 @@
+<repast.simphony.data2.engine.DataSetDescriptor>
+  <name>winner</name>
+  <type>NON_AGGREGATE</type>
+  <sourceType>theresistance.relogo.Game</sourceType>
+  <inclTick>false</inclTick>
+  <inclBatchRun>true</inclBatchRun>
+  <inclRandomSeed>false</inclRandomSeed>
+  <scheduleParams>
+    <start>1.0</start>
+    <interval>0.0</interval>
+    <priority>-Infinity</priority>
+    <pType>LAST</pType>
+    <duration>-1.0</duration>
+    <frequency>ONE_TIME</frequency>
+    <hashCode>-1884012056</hashCode>
+  </scheduleParams>
+  <atEnd>true</atEnd>
+  <methodDataSources class="linked-hash-map">
+    <entry>
+      <string>Winner</string>
+      <repast.simphony.data2.engine.MethodDataSourceDefinition>
+        <id>Winner</id>
+        <className>theresistance.relogo.Game</className>
+        <methodName>getWinner</methodName>
+      </repast.simphony.data2.engine.MethodDataSourceDefinition>
+    </entry>
+  </methodDataSources>
+  <countSources class="linked-hash-map"/>
+  <customNADataSources class="linked-hash-map"/>
+  <customAggDataSources class="linked-hash-map"/>
+</repast.simphony.data2.engine.DataSetDescriptor>

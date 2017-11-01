@@ -1,0 +1,3 @@
+"run","Winner"
+1,"empty"
+1,"Spy"

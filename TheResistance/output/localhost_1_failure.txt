@@ -1,0 +1,18 @@
+BatchSchedule.execute: error when running the schedule
+Current tick (1.0)
+java.lang.ArrayIndexOutOfBoundsException: 16
+	at repast.simphony.data2.AbstractFormatter$ItemFormatter.format(AbstractFormatter.java:27)
+	at repast.simphony.data2.AbstractFormatter$RuntimeTestFormatter.format(AbstractFormatter.java:50)
+	at repast.simphony.data2.AbstractFormatter.addData(AbstractFormatter.java:117)
+	at repast.simphony.data2.BatchParamMapFileWriter.write(BatchParamMapFileWriter.java:132)
+	at repast.simphony.data2.BatchParamMapFileWriter.access$0(BatchParamMapFileWriter.java:128)
+	at repast.simphony.data2.BatchParamMapFileWriter$OneTimeUpdater.update(BatchParamMapFileWriter.java:34)
+	at repast.simphony.data2.BatchParamMapFileWriter.rowEnded(BatchParamMapFileWriter.java:169)
+	at repast.simphony.data2.NonAggregateDataSet.record(NonAggregateDataSet.java:85)
+	at repast.simphony.data2.AbstractDataSetManager$ScheduledDataSet.execute(AbstractDataSetManager.java:119)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:238)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.batch.BatchScheduleRunner$ScheduleLoopRunnable.run(BatchScheduleRunner.java:37)
+	at java.lang.Thread.run(Unknown Source)
