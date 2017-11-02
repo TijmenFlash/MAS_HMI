@@ -2,6 +2,7 @@ package theresistance.relogo
 
 import static repast.simphony.relogo.Utility.*;
 import static repast.simphony.relogo.UtilityG.*;
+import repast.simphony.parameter.Parameters;
 import repast.simphony.relogo.AgentSet
 import repast.simphony.relogo.Stop
 import repast.simphony.relogo.Turtle;
@@ -34,10 +35,21 @@ class UserObserver extends ReLogoObserver{
 		int spyCount = 0;
 		Random generator = new Random();
 
+		Parameters p = RunEnvironment.getInstance().getParameters();
+		DI_f_2 = p.getValue("DI_f_2");
+		DI_f_3= p.getValue("DI_f_3");
+		DI_s_2= p.getValue("DI_s_2");
+		DI_s_3= p.getValue("DI_s_3");
+		DO_f_2= p.getValue("DO_f_2");
+		DO_f_3= p.getValue("DO_f_3");
+		DO_s_2= p.getValue("DO_s_2");
+		DO_s_3= p.getValue("DO_s_3");
+		DO_doublefail = p.getValue("DO_doublefail");
+		DI_doublefail = p.getValue("DI_doublefail");
 		createGames(1){
 
 		}
-
+		
 
 		// create maximum number of players
 		createPlayers(maxPlayers){
@@ -112,20 +124,21 @@ class UserObserver extends ReLogoObserver{
 	def go(){
 		//define initial variables
 		def chosen = false
-		def leader= [];
+		
 		def List team;
 		def boolean timeout = false;
 		// start round!
 		System.out.println("Go!")
+		//print out trust values at that point
+//		ask(players()){
+//			println printMe() + " " + getRole()
+//			for (t in myOutTrustLinks()){
+//				println "My trust in " + t.getEnd2() + "(" + t.getEnd2().getRole()+ ")"+ " is " + t.getTrustValue()
+//			}
+//		}
+		
 
-		// first the leader is allowed to communicate
-		System.out.println("Communicate!")
-		for (game in games()){
-			leader.add( game.getLeader())
-		}
-
-		println leader;
-		ask(leader[0]){communicate()}
+		
 		def int teamSize;
 		for (g in games()){
 			teamSize = g.getTeamSize()
@@ -133,23 +146,34 @@ class UserObserver extends ReLogoObserver{
 		// while there is no team
 		int count = 0;
 		while(chosen == false){
-			println "current count = " + count
+			def leader= [];
+			
+			// first the leader is allowed to communicate
+			System.out.println("Communicate!")
+			for (game in games()){
+				leader.add( game.getLeader())
+			}
+			//println leader;
+			ask(leader[0]){communicate()}
+			
+			//println "current count = " + count
 			count++;
+			
 			// ask leader to choose a team with a specific nr of players
-			System.out.println("choose team")
-
-			println teamSize
+//			System.out.println("choose team")
+//			println "the leader is " +  leader;
+//			println teamSize
 			team = leader[0].chooseTeam(teamSize);
 			println team
 			//after the leader has chosen a team, other players will vote in favor of or against the team
 			System.out.println("vote for team!")
-			ask(leader[0]){
-				for (t in myOutTrustLinks()){
-					print t.getEnd2().toString() + " " + t.getTrustValue() + " "
-
-				}
-				println ""
-			}
+//			ask(leader[0]){
+//				for (t in myOutTrustLinks()){
+//					print t.getEnd2().toString() + " " + t.getTrustValue() + " "
+//
+//				}
+//				println ""
+//			}
 			//collect votes
 			def votes = [0];
 			ask(players()){
@@ -166,6 +190,7 @@ class UserObserver extends ReLogoObserver{
 			}else{
 				// otherwise a new leader is selected
 				ask(games()){
+					//println "setting new leader"
 					setNewLeader();
 				}
 			}
@@ -205,6 +230,8 @@ class UserObserver extends ReLogoObserver{
 			// update trustvalues of each player
 			// set alphabeta value for failed based on teamsize:
 		}
+		
+		
 		boolean endrun = false;
 		//continue with the next round
 		ask(games()){
@@ -239,12 +266,12 @@ class UserObserver extends ReLogoObserver{
 				}
 			}
 
-			ask(players()){
-				println printMe() + " " + getRole()
-				for (t in myOutTrustLinks()){
-					println "My trust in " + t.getEnd2() + "(" + t.getEnd2().getRole()+ ")"+ " is " + t.getTrustValue()
-				}
-			}
+//			ask(players()){
+//				println printMe() + " " + getRole()
+//				for (t in myOutTrustLinks()){
+//					println "My trust in " + t.getEnd2() + "(" + t.getEnd2().getRole()+ ")"+ " is " + t.getTrustValue()
+//				}
+//			}
 		}
 	}
 

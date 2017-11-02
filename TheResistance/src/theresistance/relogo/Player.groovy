@@ -23,16 +23,16 @@ class Player extends ReLogoTurtle {
 	// functions of action in the game
 	def voteForTeam(AgentSet<Player> team, int count){
 		if ( count >= 3 & role == "Resistance"){
-			System.out.println("I voted " + 1 + "and I am  " + this.toString())
+			//println "I voted " + 1 + "and I am  " + this.toString()
 			return 1;
 		}
 
 		if (team.contains(getPlayerwithLowestTV(myOutTrustLinks(), 1)) | team.contains(getPlayerwithLowestTV(myOutTrustLinks(), 2)  ) ){
-			System.out.println("I voted " + 0 + "and I am  " + this.toString())
+			//println"I voted " + 0 + "and I am  " + this.toString()
 			return 0;
 
 		}else {
-			System.out.println("I voted " + 1 + "and I am  " + this.toString())
+			//println "I voted " + 1 + "and I am  " + this.toString()
 			return 1;
 		}
 	}
@@ -60,10 +60,10 @@ class Player extends ReLogoTurtle {
 			Random randomizer = new Random();
 			def teamfull = false;
 			while(!teamfull){
-				println "choosing team for spy"
+				//println "choosing team for spy"
 				Player random = players().get(randomizer.nextInt(players().size()));
-				println random
-				if (random.getRole() != "Spy"){
+				//println random
+				if (random.getRole() != "Spy" & !team.contains(random)){
 					team.add(random);
 					if (team.size() >= teamSize){
 						teamfull = true;
@@ -81,12 +81,12 @@ class Player extends ReLogoTurtle {
 		// the agent gets its most trusted friend and asks this friend for information about the other agents.
 		// the agent updates its own values depending on the trust it has in the receiver and the receivers trust in the other agents
 
-		//System.out.println(myOutTrustLinks());
+		//System.out.//println(myOutTrustLinks());
 		def mostTrustedPlayer = getPlayerwithLargestTV(myOutTrustLinks(), 1);
 		//def leastTrustedPlayer = getPlayerwithLowestTV(myOutTrustLinks(), 1);
 		double tp = trustLink(this, mostTrustedPlayer).getTrustValue(); // current trust in most Trusted player
 
-		println "I am asking " + mostTrustedPlayer + " and my trust in him is " + tp;
+		//println "I am asking " + mostTrustedPlayer + " and my trust in him is " + tp;
 
 		// get all trustLinks from the most trusted player
 		def trustLinksMostTrustedPlayer
@@ -97,7 +97,7 @@ class Player extends ReLogoTurtle {
 		for (link in trustLinksMostTrustedPlayer){
 			//new value for each link:
 			def TI = trustLink(this, link.getEnd2());
-			//println TI
+			////println TI
 			if (TI != null){
 				double ti = TI.getTrustValue(); // current trust in player X
 				// scale tp to range [-1 1] via formula y = 2x - 1
@@ -112,9 +112,9 @@ class Player extends ReLogoTurtle {
 					new_ti = 0.99;
 				}
 
-				// scale tp back for printing purposes
+				// scale tp back for //printing purposes
 				tp = tp/2.0 +0.5;
-				System.out.println("Ti: " + ti + " tp: " + tp + " tpi: " + tpi + " new_ti: " + new_ti)
+				//System.out.//println("Ti: " + ti + " tp: " + tp + " tpi: " + tpi + " new_ti: " + new_ti)
 				trustLink(this, link.getEnd2()).setTrustValue(new_ti);
 			}
 		}
@@ -122,6 +122,15 @@ class Player extends ReLogoTurtle {
 
 
 	def updateTrustValueBasedonDO(AgentSet<Player> team, String missionStatus, int vote){
+		println DI_f_2
+		println DI_f_3
+		println DI_s_2
+		println DI_s_3
+		println DO_f_2
+		println DO_f_3
+		println DO_s_2
+		println DO_s_3
+		
 		def ab;
 		// if the mission has succeeded
 		if (missionStatus == "succeed"){
@@ -192,14 +201,14 @@ class Player extends ReLogoTurtle {
 				}
 			}
 		}
-		println this.toString() + " " + missionStatus + " alphabeta = " + ab
+		//println this.toString() + " " + missionStatus + " alphabeta = " + ab
 		updateTrustValueAlphaBeta(ab, team);
 	}
 
 	// update trustvalue based on direct observation based on formula
 	def updateTrustValueAlphaBeta(double alphabeta, AgentSet<Player> team){
 		def newValue;
-
+		println alphabeta
 		// if alphabeta >=0 cooperation, if alphabeta <0 dan defection
 		if (alphabeta >= 0){
 			//Cooperation by j:
@@ -230,7 +239,7 @@ class Player extends ReLogoTurtle {
 					}
 					tp = (tp/2.0) +0.5;
 					trustLink(this, link.getEnd2()).setTrustValue(newValue);
-					println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
+					//println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
 
 				}
 			}
@@ -254,9 +263,9 @@ class Player extends ReLogoTurtle {
 					}
 
 					// scale the newValue back to [0, 1]
-					//println "new Value before scaling: " + newValue;
+					////println "new Value before scaling: " + newValue;
 					newValue = (newValue/2.0) +0.5;
-					//println "new Value after scaling: " + newValue;
+					////println "new Value after scaling: " + newValue;
 					if (newValue  <= 0){
 						newValue  = 0.01;
 					}
@@ -265,7 +274,7 @@ class Player extends ReLogoTurtle {
 					}
 					tp = (tp/2.0) +0.5;
 					trustLink(this, link.getEnd2()).setTrustValue(newValue);
-					println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
+					//println "I am: " + this.toString() + " and I update " + p.toString() + " from " + tp + " to " + newValue;
 
 				}
 			}
